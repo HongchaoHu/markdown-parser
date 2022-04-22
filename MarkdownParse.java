@@ -12,7 +12,7 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
 
-       /*  if (!markdown.contains("[")){
+        if (!markdown.contains("[")){
             return toReturn; 
         } 
 
@@ -30,7 +30,7 @@ public class MarkdownParse {
 
         else if (!markdown.contains(")")){
             return toReturn; 
-        } */
+        }
 
         while(currentIndex < markdown.length()) {
             int openBracket = markdown.indexOf("[", currentIndex);
@@ -39,9 +39,10 @@ public class MarkdownParse {
             int closeParen = markdown.indexOf(")", openParen);
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
-           // if (!markdown.substring(currentIndex,markdown.length()).contains("[")) {
-           // return toReturn;
-           // }
+            
+            if (!markdown.substring(currentIndex,markdown.length()).contains("[")) {
+                return toReturn;
+            }
         
             System.out.println(currentIndex);
         }
