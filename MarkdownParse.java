@@ -14,10 +14,6 @@ public class MarkdownParse {
 
         if (!markdown.contains("[")){
             return toReturn; 
-        } 
-
-        else if (!markdown.contains("[")){
-            return toReturn; 
         }
 
         else if (!markdown.contains("]")){
