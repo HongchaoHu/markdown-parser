@@ -5,21 +5,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-
-public class MarkdownParse {
+public class MarkdownParseOriginal {
 
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
-        
-        while (currentIndex < markdown.length()) {
-            if (!markdown.substring(currentIndex,markdown.length()).contains("(")) {
+        while(currentIndex < markdown.length()) {
+            if (!markdown.contains("[")) {
                 return toReturn;
-            } 
-            else if (!markdown.substring(currentIndex,markdown.length()).contains("[")) {
-                return toReturn;
-            } 
+            }
+            //if(!markdown.contains("[") || !markdown.contains("]")) {
+             //   break;
+            //}
+            //if(!markdown.contains("(") || !markdown.contains(")")) {
+            //    break;
+            //}
             if ((markdown.contains("[") || markdown.contains("]")) && (markdown.contains("(") || markdown.contains(")"))) {
             int openBracket = markdown.indexOf("[", currentIndex);
             int closeBracket = markdown.indexOf("]", openBracket);
@@ -27,11 +28,14 @@ public class MarkdownParse {
             int closeParen = markdown.indexOf(")", openParen);
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
-
-            System.out.println(currentIndex);
-            }    
-            
+            if (!markdown.substring(currentIndex,markdown.length()).contains("(")) {
+                return toReturn;
+            } 
+            else if (!markdown.substring(currentIndex,markdown.length()).contains("[")) {
+                return toReturn;
+            } 
         }
+    }
 
         return toReturn;
     }
@@ -42,6 +46,5 @@ public class MarkdownParse {
         String content = Files.readString(fileName);
         ArrayList<String> links = getLinks(content);
 	    System.out.println(links);
-        System.out.println("this is a small change in the program.");
     }
 }
