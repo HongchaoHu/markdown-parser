@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class MarkdownParseTest {
+    
     @Test
     public void addition() {
         assertEquals(2, 1+1);
@@ -130,32 +131,10 @@ public class MarkdownParseTest {
     }
     
     @Test
-    public void MardownReviewTestSnippet1() throws IOException{
-        Path snippet1Path = Path.of("/Users/jasonhu/Documents/GitHub/markdown-parser/TestSnippet1.md");
-        String snippet1Content = Files.readString(snippet1Path);
-        ArrayList<String> links = MarkdownParseReview.getLinks(snippet1Content);
-        ArrayList<String> result = new ArrayList<String>();
-        result.add("`google.com");
-        assertEquals(result, links);
-    }
-    
-    @Test
     public void MyMardownTestSnippet2() throws IOException{
         Path snippet2Path = Path.of("/Users/jasonhu/Documents/GitHub/markdown-parser/TestSnippet2.md");
         String snippet2Content = Files.readString(snippet2Path);
         ArrayList<String> links = MarkdownParse.getLinks(snippet2Content);
-        ArrayList<String> result = new ArrayList<String>();
-        result.add("a.com");
-        result.add("a.com(())");
-        result.add("example.com");
-        assertEquals(result, links);
-    }
-    
-    @Test
-    public void MardownReviewTestSnippet2() throws IOException{
-        Path snippet2Path = Path.of("/Users/jasonhu/Documents/GitHub/markdown-parser/TestSnippet2.md");
-        String snippet2Content = Files.readString(snippet2Path);
-        ArrayList<String> links = MarkdownParseReview.getLinks(snippet2Content);
         ArrayList<String> result = new ArrayList<String>();
         result.add("a.com");
         result.add("a.com(())");
@@ -173,6 +152,28 @@ public class MarkdownParseTest {
         assertEquals(result, links);
     }
     
+    @Test
+    public void MardownReviewTestSnippet1() throws IOException{
+        Path snippet1Path = Path.of("/Users/jasonhu/Documents/GitHub/markdown-parser/TestSnippet1.md");
+        String snippet1Content = Files.readString(snippet1Path);
+        ArrayList<String> links = MarkdownParseReview.getLinks(snippet1Content);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("`google.com");
+        assertEquals(result, links);
+    }
+
+    @Test
+    public void MardownReviewTestSnippet2() throws IOException{
+        Path snippet2Path = Path.of("/Users/jasonhu/Documents/GitHub/markdown-parser/TestSnippet2.md");
+        String snippet2Content = Files.readString(snippet2Path);
+        ArrayList<String> links = MarkdownParseReview.getLinks(snippet2Content);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("a.com");
+        result.add("a.com(())");
+        result.add("example.com");
+        assertEquals(result, links);
+    }
+
     @Test
     public void MardownReviewTestSnippet3() throws IOException{
         Path snippet3Path = Path.of("/Users/jasonhu/Documents/GitHub/markdown-parser/TestSnippet3.md");
