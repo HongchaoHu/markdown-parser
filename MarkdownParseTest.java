@@ -66,9 +66,7 @@ public class MarkdownParseTest {
         ArrayList<String> expected = new ArrayList<>();
         expected.add("https://something.com");
         expected.add("some-page.html");
-
         assertEquals(expected,links);
-
     }
 
     @Test
@@ -79,9 +77,7 @@ public class MarkdownParseTest {
         String content = Files.readString(fileName);
         ArrayList<String> links = test.getLinks(content);
         ArrayList<String> expected = new ArrayList<>();
-
         assertEquals(expected,links);
-
     }
 
     @Test
@@ -92,9 +88,7 @@ public class MarkdownParseTest {
         String content = Files.readString(fileName);
         ArrayList<String> links = test.getLinks(content);
         ArrayList<String> expected = new ArrayList<>();
-
         assertEquals(expected,links);
-
     }
 
     @Test
@@ -105,9 +99,7 @@ public class MarkdownParseTest {
         String content = Files.readString(fileName);
         ArrayList<String> links = test.getLinks(content);
         ArrayList<String> expected = new ArrayList<>();
-
         assertEquals(expected,links);
-
     }
 
     @Test
@@ -122,5 +114,41 @@ public class MarkdownParseTest {
 
         assertEquals(expected,links);
 
+    }
+    
+    @Test
+    public void MDPTestSnippet1() throws IOException{
+        Path snippet1Path = Path.of("TestSnippet1.md");
+        String snippet1Content = Files.readString(snippet1Path);
+        ArrayList<String> links = MarkdownParse.getLinks(snippet1Content);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("`google.com");
+        result.add("google.com");
+        result.add("ucsd.edu");
+        assertEquals(result, links);
+    }
+    
+    @Test
+    public void MDPRTestSnippet2() throws IOException{
+        File file = new File("TestSnippet2.md");
+        Scanner s = new Scanner(file);
+        ArrayList<String> links = MarkdownParseReview.getLinks(s);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("a.com");
+        result.add("a.com(())");
+        result.add("example.com");
+        assertEquals(result, links);
+    }
+    
+    @Test
+    public void MDPRTestSnippet3() throws IOException{
+        File file = new File("TestSnippet3.md");
+        Scanner s = new Scanner(file);
+        ArrayList<String> links = MarkdownParseReview.getLinks(s);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("https://www.twitter.com");
+        result.add("https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule");
+        result.add("https://cse.ucsd.edu/");
+        assertEquals(result, links);
     }
 }
