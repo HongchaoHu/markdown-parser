@@ -41,6 +41,9 @@ public class MarkdownParse {
             if (parenTotal < bracketTotal){
                 return toReturn;
             }
+            if (toReturn.contains("\n")) {
+                currentIndex = closeBracket;
+            }
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
             if (!markdown.substring(currentIndex,markdown.length()).contains("[")
